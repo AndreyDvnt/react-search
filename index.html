@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ContactList</title>
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="content"></div>
+	
+	<script type="text/babel">
+		
+		var Reviews = [
+			{
+				name: 'Andrey',
+				id: 1,
+				message: 'Было круто, все супер сервис на высоте'
+			},
+			{
+				name: 'Ivan',
+				id: 2,
+				message: 'Привет всем я из воронежа'
+			},
+			{
+				name: 'Petr',
+				id: 3,
+				message: 'Было ужасно, но в то же время замечательно'
+			},
+			{
+				name: 'Anastasia',
+				id: 4,
+				message: 'Я не помню как было, и вообще ничего не помню... Кстати кто я?'
+			}
+
+		];
+		
+		
+		var Review = React.createClass({
+			render: function(){
+				return <li className="element">
+							<div className="name">{this.props.name}</div>
+							<div className="message">{this.props.message}</div>
+						</li>;
+			}
+		});
+
+//основной компонент
+
+		var RList = React.createClass({
+			getInitialState: function() {
+				return {
+					baseState: Reviews
+				};
+			},
+			Searching: function( event ) {
+				var Val = event.target.value.toLowerCase();
+				var Request = Reviews.filter(function(el){
+					var valMessage = el.message.toLowerCase();
+					return valMessage.indexOf(Val) !== -1;
+				});
+
+				this.setState({
+					baseState:Request
+				});
+			},
+			render: function(){
+				return (
+					<ul className="block-reviews">
+						<input type="text" placeholder="Поиск..." onChange={this.Searching} className="search"/>
+						{
+							this.state.baseState.map(function(el) {
+								return <Review 
+										key={el.id}
+										name={el.name}
+										message={el.message} />;
+							})
+						}
+					</ul>
+				);
+			}
+		});
+
+		ReactDOM.render(
+			<RList />,
+			document.getElementById('content')
+		)
+
+	</script>
+    
+</body>
+</html>

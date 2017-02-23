@@ -1,0 +1,24 @@
+.block-reviews {
+    padding: 20px;
+}
+.element {
+    list-style: none;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+.name {
+    font-weight: 600;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+.message {
+    font-size: 12px;
+    color: #333;
+}
+.search {
+    padding: 10px 20px;
+    width: 300px;
+}
+.element:last-child {
+    border-bottom: none;
+}
